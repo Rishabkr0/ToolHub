@@ -1,0 +1,236 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// -----------------------------------------------------------------------------
+// IDENTITY & ACCESS MANAGEMENT (Better Auth)
+// -----------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  accounts      Account[]
+  
+  preference    UserPreference?
+  history       ToolHistory[]
+  favorites     FavoriteTool[]
+  collections   Collection[]
+  uploads       Upload[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+// -----------------------------------------------------------------------------
+// USER PREFERENCES & SETTINGS
+// -----------------------------------------------------------------------------
+
+model UserPreference {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  theme       String   @default("system") // light, dark, system
+  language    String   @default("en")
+  emailsOptIn Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("user_preference")
+}
+
+// -----------------------------------------------------------------------------
+// TOOL CATALOG & CATEGORIZATION
+// -----------------------------------------------------------------------------
+
+model Category {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String?
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tools       Tool[]
+
+  @@map("category")
+}
+
+model Tag {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  createdAt   DateTime @default(now())
+  
+  tools       Tool[]   // Implicit M:N
+
+  @@map("tag")
+}
+
+model Tool {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String
+  icon        String?
+  isActive    Boolean  @default(true)
+  isPro       Boolean  @default(false)
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tags        Tag[]    // Implicit M:N
+  history     ToolHistory[]
+  favoritedBy FavoriteTool[]
+  inCollections CollectionTool[]
+  usageStats  UsageStat[]
+
+  @@index([categoryId])
+  @@map("tool")
+}
+
+// -----------------------------------------------------------------------------
+// WORKSPACE: HISTORY, FAVORITES & COLLECTIONS
+// -----------------------------------------------------------------------------
+
+model ToolHistory {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  toolId    String
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  usedAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([toolId])
+  @@map("tool_history")
+}
+
+model FavoriteTool {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  toolId    String
+  tool      Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, toolId]) // Composite PK
+  @@map("favorite_tool")
+}
+
+model Collection {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  isPublic    Boolean  @default(false)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tools       CollectionTool[]
+
+  @@index([userId])
+  @@map("collection")
+}
+
+model CollectionTool {
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  toolId       String
+  tool         Tool       @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  orderIndex   Int        @default(0)
+  addedAt      DateTime   @default(now())
+
+  @@id([collectionId, toolId])
+  @@map("collection_tool")
+}
+
+// -----------------------------------------------------------------------------
+// PRIVACY & ANALYTICS
+// -----------------------------------------------------------------------------
+
+model Upload {
+  id        String   @id @default(uuid())
+  userId    String?  // Optional: Allows guest uploads
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  fileUrl   String
+  fileKey   String   @unique
+  mimeType  String
+  sizeBytes Int
+  expiresAt DateTime // For auto-deletion job
+  createdAt DateTime @default(now())
+
+  @@index([expiresAt])
+  @@index([userId])
+  @@map("upload")
+}
+
+model UsageStat {
+  id         String   @id @default(uuid())
+  toolId     String
+  tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  date       DateTime // e.g., truncated to day
+  usageCount Int      @default(0)
+
+  @@unique([toolId, date])
+  @@map("usage_stat")
+}

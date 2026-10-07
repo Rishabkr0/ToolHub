@@ -12,12 +12,14 @@ export function MarketingHeader() {
   return (
     <header className="fixed top-0 w-full z-40 bg-background border-b-[3px] border-on-background neubrutal-shadow">
       <div className="h-20 w-full px-4 lg:px-lg flex items-center justify-between gap-md">
-        <div className="flex items-center gap-sm min-w-max z-50">
-          <Link href="/" className="font-display-lg text-display-lg text-[24px] lg:text-[32px]">ToolHub</Link>
-        </div>
+        <div className="flex items-center flex-1 gap-8">
+          <div className="flex items-center gap-sm min-w-max z-50">
+            <Link href="/" className="font-display-lg text-display-lg text-[24px] lg:text-[32px]">ToolHub</Link>
+          </div>
 
-        <div className="hidden lg:flex flex-1 max-w-md relative">
-          <SearchTrigger placeholder="Search for tools... (Cmd+K)" />
+          <div className="hidden lg:flex flex-1 max-w-md relative">
+            <SearchTrigger placeholder="Search for tools... (Cmd+K)" />
+          </div>
         </div>
 
         <nav className="hidden xl:flex items-center gap-md">

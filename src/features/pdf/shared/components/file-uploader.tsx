@@ -76,10 +76,10 @@ export function FileUploader({
         {isDragActive ? <FilePlus className="w-8 h-8" /> : <UploadCloud className="w-8 h-8" />}
       </div>
       <h3 className="font-headline-md text-on-surface mb-xs text-center">
-        {isDragActive ? "Drop PDF(s) here" : (title || (multiple ? "Click or drag PDFs to this area" : "Click or drag a PDF to this area"))}
+        {isDragActive ? "Drop files here" : (title || (multiple ? "Click or drag files to this area" : "Click or drag a file to this area"))}
       </h3>
       <p className="font-body-md text-on-surface-variant text-center max-w-sm">
-        {description || (multiple ? "Select multiple PDF files." : "Select a PDF file.")} Files are processed entirely in your browser.
+        {description || (multiple ? "Select multiple files." : "Select a file.")} Files are processed entirely in your browser.
       </p>
     </div>
   )

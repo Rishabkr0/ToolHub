@@ -133,5 +133,45 @@ export const TOOLS: ToolMetadata[] = [
     isPro: false,
     tags: ["markdown", "editor", "preview", "html", "writer", "export", "doc"]
   },
+  {
+    slug: "image-converter",
+    name: "Image Format Converter",
+    description: "Convert images to PNG, JPG, or WebP instantly in your browser.",
+    category: "images",
+    isPro: false,
+    tags: ["image", "convert", "png", "jpg", "webp"]
+  },
+  {
+    slug: "compress-image",
+    name: "Image Compressor",
+    description: "Reduce image file size quickly without sacrificing visual quality.",
+    category: "images",
+    isPro: false,
+    tags: ["image", "compress", "reduce", "size", "optimize"]
+  },
+  {
+    slug: "resize-image",
+    name: "Image Cropper",
+    description: "Visually crop images and change dimensions instantly with high quality resampling.",
+    category: "images",
+    isPro: false,
+    tags: ["image", "crop", "resize", "scale", "dimensions", "width", "height"]
+  },
+  {
+    slug: "color-extractor",
+    name: "Color Palette Extractor",
+    description: "Extract the dominant colors and create a beautiful palette from any image.",
+    category: "images",
+    isPro: false,
+    tags: ["image", "colors", "palette", "hex", "rgb", "extract"]
+  },
+  {
+    slug: "remove-background",
+    name: "Background Remover",
+    description: "Instantly remove the background from any photo using local AI.",
+    category: "images",
+    isPro: false,
+    tags: ["image", "background", "remove", "transparent", "png", "ai"]
+  },
 ]
 

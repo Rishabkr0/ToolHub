@@ -1,6 +1,6 @@
 import { CATEGORIES, TOOLS, ToolCategory } from "@/config/tools"
 import { ToolCard } from "@/features/tools/components/tool-card"
-import { Layers, Scissors, Minimize2, FileText, LucideIcon, Image as ImageIcon, ImagePlus } from "lucide-react"
+import { Layers, Scissors, Minimize2, FileText, LucideIcon, Image as ImageIcon, ImagePlus, Hash, Type, GitCompare, ListFilter, FileEdit } from "lucide-react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -12,6 +12,11 @@ const iconMap: Record<string, LucideIcon> = {
   "compress-pdf": Minimize2,
   "pdf-to-jpg": ImageIcon,
   "jpg-to-pdf": ImagePlus,
+  "word-counter": Hash,
+  "case-converter": Type,
+  "text-diff": GitCompare,
+  "duplicate-lines": ListFilter,
+  "markdown-editor": FileEdit,
 }
 
 const colorMap: Record<string, { bg: string, color: string }> = {

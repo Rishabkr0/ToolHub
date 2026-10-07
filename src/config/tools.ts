@@ -93,4 +93,45 @@ export const TOOLS: ToolMetadata[] = [
     isPro: false,
     tags: ["pdf", "organize", "reorder", "pages"]
   },
+  {
+    slug: "word-counter",
+    name: "Word Counter",
+    description: "Analyze word counts, character volume, reading time, and readability in real-time.",
+    category: "documents",
+    isPro: false,
+    tags: ["words", "counter", "characters", "readability", "statistics", "text", "document"]
+  },
+  {
+    slug: "case-converter",
+    name: "Case Converter",
+    description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, and more.",
+    category: "documents",
+    isPro: false,
+    tags: ["case", "converter", "uppercase", "lowercase", "camelcase", "titlecase", "text"]
+  },
+  {
+    slug: "text-diff",
+    name: "Text Diff & Comparator",
+    description: "Compare two versions of a document side-by-side to highlight added and removed text.",
+    category: "documents",
+    isPro: false,
+    tags: ["diff", "compare", "comparator", "text", "changes", "document", "version"]
+  },
+  {
+    slug: "duplicate-lines",
+    name: "Duplicate Line Remover",
+    description: "Remove duplicate lines, filter out empty rows, and sort lists alphabetically or by length.",
+    category: "documents",
+    isPro: false,
+    tags: ["duplicates", "deduplicate", "lines", "sort", "clean", "list", "unique"]
+  },
+  {
+    slug: "markdown-editor",
+    name: "Markdown Editor & Preview",
+    description: "Write and format Markdown with live styled preview, and export to HTML or .md files.",
+    category: "documents",
+    isPro: false,
+    tags: ["markdown", "editor", "preview", "html", "writer", "export", "doc"]
+  },
 ]
+

@@ -38,6 +38,7 @@ export function PopularToolsGrid() {
             icon={Hash} 
             bgClass="bg-primary-fixed" 
             colorClass="bg-primary" 
+            href="/tool/word-counter"
           />
         </div>
       </div>

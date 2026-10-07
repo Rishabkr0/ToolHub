@@ -15,14 +15,15 @@ const iconMap: Record<string, LucideIcon> = {
 }
 
 const colorMap: Record<string, { bg: string, color: string }> = {
+  "pdf": { bg: "bg-error-container", color: "bg-error" },
   "documents": { bg: "bg-tertiary-fixed", color: "bg-tertiary" },
   "images": { bg: "bg-secondary-fixed", color: "bg-secondary" },
   "video": { bg: "bg-[#d1f4e0]", color: "bg-[#00875a]" },
   "audio": { bg: "bg-[#ffe6d5]", color: "bg-[#e65c00]" },
   "ai": { bg: "bg-primary-fixed", color: "bg-primary" },
   "developer": { bg: "bg-surface-container", color: "bg-surface-variant" },
-  "calculators": { bg: "bg-error-container", color: "bg-error" },
-  "productivity": { bg: "bg-secondary-container", color: "bg-secondary" },
+  "calculators": { bg: "bg-[#e8def8]", color: "bg-[#6750a4]" },
+  "productivity": { bg: "bg-[#fdf0d5]", color: "bg-[#8b5000]" },
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {

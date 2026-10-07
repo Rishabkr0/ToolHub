@@ -1,6 +1,11 @@
 import { CATEGORIES, TOOLS, ToolCategory } from "@/config/tools"
 import { ToolCard } from "@/features/tools/components/tool-card"
-import { Layers, Scissors, Minimize2, FileText, LucideIcon, Image as ImageIcon, ImagePlus, Hash, Type, GitCompare, ListFilter, FileEdit } from "lucide-react"
+import { 
+  Layers, Scissors, Minimize2, FileText, LucideIcon, Image as ImageIcon, 
+  ImagePlus, Hash, Type, GitCompare, ListFilter, FileEdit,
+  RotateCw, FileMinus, FileOutput, LayoutGrid, FileImage, 
+  Minimize, Crop, Palette, Eraser 
+} from "lucide-react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
@@ -12,11 +17,20 @@ const iconMap: Record<string, LucideIcon> = {
   "compress-pdf": Minimize2,
   "pdf-to-jpg": ImageIcon,
   "jpg-to-pdf": ImagePlus,
+  "rotate-pdf": RotateCw,
+  "delete-pdf-pages": FileMinus,
+  "extract-pdf-pages": FileOutput,
+  "organize-pdf": LayoutGrid,
   "word-counter": Hash,
   "case-converter": Type,
   "text-diff": GitCompare,
   "duplicate-lines": ListFilter,
   "markdown-editor": FileEdit,
+  "image-converter": FileImage,
+  "compress-image": Minimize,
+  "resize-image": Crop,
+  "color-extractor": Palette,
+  "remove-background": Eraser,
 }
 
 const colorMap: Record<string, { bg: string, color: string }> = {

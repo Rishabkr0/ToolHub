@@ -18,10 +18,10 @@ export function CategoryGrid() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-md lg:gap-lg">
           <CategoryCard title="Documents" count={3} icon={FileText} containerBg="bg-tertiary-fixed" iconBg="bg-tertiary" textColor="text-on-tertiary-fixed-variant" iconColor="text-on-tertiary" href="/category/documents" />
-          <CategoryCard title="Images" count={32} icon={Image} containerBg="bg-secondary-fixed" iconBg="bg-secondary" textColor="text-on-secondary-fixed-variant" iconColor="text-on-secondary" />
-          <CategoryCard title="Video" count={28} icon={Video} containerBg="bg-[#d1f4e0]" iconBg="bg-[#00875a]" textColor="text-[#006644]" iconColor="text-white" />
-          <CategoryCard title="Audio" count={15} icon={Music} containerBg="bg-[#ffe6d5]" iconBg="bg-[#e65c00]" textColor="text-[#b34700]" iconColor="text-white" />
-          <CategoryCard title="AI Tools" count={56} icon={Bot} containerBg="bg-primary-fixed" iconBg="bg-primary" textColor="text-on-primary-fixed-variant" iconColor="text-on-primary" />
+          <CategoryCard title="Images" count={32} icon={Image} containerBg="bg-secondary-fixed" iconBg="bg-secondary" textColor="text-on-secondary-fixed-variant" iconColor="text-on-secondary" href="/category/images" />
+          <CategoryCard title="Video" count={28} icon={Video} containerBg="bg-[#d1f4e0]" iconBg="bg-[#00875a]" textColor="text-[#006644]" iconColor="text-white" href="/category/video" />
+          <CategoryCard title="Audio" count={15} icon={Music} containerBg="bg-[#ffe6d5]" iconBg="bg-[#e65c00]" textColor="text-[#b34700]" iconColor="text-white" href="/category/audio" />
+          <CategoryCard title="AI Tools" count={56} icon={Bot} containerBg="bg-primary-fixed" iconBg="bg-primary" textColor="text-on-primary-fixed-variant" iconColor="text-on-primary" href="/category/ai" />
         </div>
       </div>
     </section>

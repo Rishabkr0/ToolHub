@@ -6,6 +6,7 @@ import { Search, FileText, ImageIcon, Scissors, Settings, Moon, Sun, Monitor } f
 import { useTheme } from "next-themes"
 import { SearchContext } from "@/providers"
 import { useRouter } from "next/navigation"
+import { TOOLS } from "@/config/tools"
 
 export function CommandPalette() {
   const { setTheme } = useTheme()
@@ -41,15 +42,16 @@ export function CommandPalette() {
             <Command.Empty className="py-6 text-center text-body-md text-on-surface-variant">No results found.</Command.Empty>
             
             <Command.Group heading="Tools" className="text-label-bold text-on-surface-variant px-2 py-1 [&_[cmdk-group-items]]:flex [&_[cmdk-group-items]]:flex-col [&_[cmdk-group-items]]:gap-1 mt-2">
-              <Command.Item onSelect={() => { router.push('/tool/merge-pdf'); setIsOpen(false) }} className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-surface-container-high cursor-pointer aria-selected:bg-surface-container-high text-body-md text-on-surface">
-                <FileText className="h-4 w-4" /> Merge PDF
-              </Command.Item>
-              <Command.Item onSelect={() => { router.push('/tool/remove-background'); setIsOpen(false) }} className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-surface-container-high cursor-pointer aria-selected:bg-surface-container-high text-body-md text-on-surface">
-                <ImageIcon className="h-4 w-4" /> Remove Background
-              </Command.Item>
-              <Command.Item onSelect={() => { router.push('/tool/trim-video'); setIsOpen(false) }} className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-surface-container-high cursor-pointer aria-selected:bg-surface-container-high text-body-md text-on-surface">
-                <Scissors className="h-4 w-4" /> Trim Video
-              </Command.Item>
+              {TOOLS.map((tool) => (
+                <Command.Item 
+                  key={tool.slug}
+                  value={tool.name + " " + tool.tags.join(" ")}
+                  onSelect={() => { router.push(`/tool/${tool.slug}`); setIsOpen(false) }} 
+                  className="flex items-center gap-2 px-2 py-2 rounded-md hover:bg-surface-container-high cursor-pointer aria-selected:bg-surface-container-high text-body-md text-on-surface"
+                >
+                  <FileText className="h-4 w-4" /> {tool.name}
+                </Command.Item>
+              ))}
             </Command.Group>
             
             <Command.Group heading="Theme" className="text-label-bold text-on-surface-variant px-2 py-1 [&_[cmdk-group-items]]:flex [&_[cmdk-group-items]]:flex-col [&_[cmdk-group-items]]:gap-1 mt-2 border-t-[3px] border-on-background pt-2">

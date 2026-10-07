@@ -10,7 +10,12 @@ export async function mergePdfs(files: File[], onProgress?: (stage: string) => v
   for (const file of files) {
     try {
       const arrayBuffer = await file.arrayBuffer();
-      const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+      let pdf;
+      try {
+        pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+      } catch (err) {
+        throw new Error("Failed to load PDF. It may be encrypted or corrupted.");
+      }
       
       const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
       copiedPages.forEach((page) => {

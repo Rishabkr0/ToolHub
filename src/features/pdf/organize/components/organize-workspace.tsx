@@ -6,6 +6,7 @@ import {
   closestCenter,
   KeyboardSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
   useSensors,
   DragEndEvent
@@ -71,6 +72,12 @@ export function OrganizeWorkspace({
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 8, // Require 8px movement before dragging to allow clicks to register
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
       },
     }),
     useSensor(KeyboardSensor, {

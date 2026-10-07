@@ -22,7 +22,12 @@ export async function compressPdf(
   onProgress?.("processing");
   
   // Loading and re-saving naturally performs garbage collection of dead objects
-  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  let pdfDoc;
+  try {
+    pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  } catch (err) {
+    throw new Error("Failed to load PDF. It may be encrypted or corrupted.");
+  }
   
   if (mode === "maximum") {
     // Strip metadata

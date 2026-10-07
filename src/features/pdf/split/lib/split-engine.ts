@@ -12,7 +12,12 @@ export interface SplitResult {
 
 export async function parsePdfForSplitting(file: File): Promise<{ pdfDoc: PDFDocument; pageCount: number }> {
   const arrayBuffer = await file.arrayBuffer();
-  const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  let pdfDoc;
+  try {
+    pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+  } catch (err) {
+    throw new Error("Failed to load PDF. It may be encrypted or corrupted.");
+  }
   return { pdfDoc, pageCount: pdfDoc.getPageCount() };
 }
 

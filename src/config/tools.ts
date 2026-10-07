@@ -1,4 +1,4 @@
-export type ToolCategory = "documents" | "images" | "video" | "ai" | "developer" | "calculators" | "productivity"
+export type ToolCategory = "documents" | "pdf" | "images" | "video" | "ai" | "developer" | "calculators" | "productivity"
 
 export interface ToolMetadata {
   slug: string
@@ -10,7 +10,8 @@ export interface ToolMetadata {
 }
 
 export const CATEGORIES = [
-  { slug: "documents", name: "Documents", description: "PDF editing, merging, and conversion tools." },
+  { slug: "pdf", name: "PDF", description: "PDF editing, merging, and conversion utilities." },
+  { slug: "documents", name: "Documents", description: "Text and document formatting, conversion, and processing tools." },
   { slug: "images", name: "Images", description: "Crop, resize, filter, and convert image formats." },
   { slug: "video", name: "Video", description: "Trim, compress, and edit video files easily." },
   { slug: "ai", name: "AI Tools", description: "Artificial Intelligence powered utilities." },
@@ -24,7 +25,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "merge-pdf", 
     name: "Merge PDF", 
     description: "Combine multiple PDFs into a single document.", 
-    category: "documents", 
+    category: "pdf", 
     isPro: false, 
     tags: ["pdf", "merge", "combine"] 
   },
@@ -32,7 +33,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "split-pdf", 
     name: "Split PDF", 
     description: "Extract pages from your PDF or split them into multiple separate files instantly.", 
-    category: "documents", 
+    category: "pdf", 
     isPro: false, 
     tags: ["pdf", "split", "extract", "pages"] 
   },
@@ -40,7 +41,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "compress-pdf", 
     name: "Compress PDF", 
     description: "Optimize PDF structure to reduce file size without losing quality.", 
-    category: "documents", 
+    category: "pdf", 
     isPro: false, 
     tags: ["pdf", "compress", "optimize", "reduce"] 
   },
@@ -48,7 +49,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "pdf-to-jpg", 
     name: "PDF to JPG", 
     description: "Convert PDF pages into high-quality JPG images.", 
-    category: "documents", 
+    category: "pdf", 
     isPro: false, 
     tags: ["pdf", "jpg", "image", "convert", "rasterize"] 
   },
@@ -56,7 +57,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "jpg-to-pdf", 
     name: "JPG to PDF", 
     description: "Convert JPG and PNG images to a PDF document.", 
-    category: "documents", 
+    category: "pdf", 
     isPro: false, 
     tags: ["jpg", "pdf", "image", "convert", "images"] 
   },
@@ -64,7 +65,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "rotate-pdf",
     name: "Rotate PDF",
     description: "Rotate individual pages or the entire PDF document.",
-    category: "documents",
+    category: "pdf",
     isPro: false,
     tags: ["pdf", "rotate", "pages", "orientation"]
   },
@@ -72,7 +73,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "delete-pdf-pages",
     name: "Delete PDF Pages",
     description: "Remove unnecessary pages from your PDF document.",
-    category: "documents",
+    category: "pdf",
     isPro: false,
     tags: ["pdf", "delete", "remove", "pages"]
   },
@@ -80,7 +81,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "extract-pdf-pages",
     name: "Extract PDF Pages",
     description: "Extract specific pages from your PDF into a new document.",
-    category: "documents",
+    category: "pdf",
     isPro: false,
     tags: ["pdf", "extract", "pages", "select"]
   },
@@ -88,7 +89,7 @@ export const TOOLS: ToolMetadata[] = [
     slug: "organize-pdf",
     name: "Organize PDF",
     description: "Reorder, rotate, delete, or duplicate pages in your PDF.",
-    category: "documents",
+    category: "pdf",
     isPro: false,
     tags: ["pdf", "organize", "reorder", "pages"]
   },

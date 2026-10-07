@@ -1,9 +1,12 @@
 "use client"
 
 import * as React from "react"
-import { useDropzone } from "react-dropzone"
+import { useDropzone, FileRejection } from "react-dropzone"
 import { UploadCloud, FilePlus } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
+
+const MAX_FILE_SIZE = 50 * 1024 * 1024 // 50MB
 
 interface FileUploaderProps {
   onFilesAccepted: (files: File[]) => void
@@ -19,7 +22,7 @@ export function FileUploader({
   isUploading = false,
   multiple = true,
   title = "Click or drag files here",
-  description = "Support for PDF documents",
+  description = "Support for PDF documents up to 50MB",
   accept = {
     'application/pdf': ['.pdf']
   }
@@ -33,11 +36,25 @@ export function FileUploader({
     [onFilesAccepted]
   )
 
+  const onDropRejected = React.useCallback((fileRejections: FileRejection[]) => {
+    fileRejections.forEach((rejection) => {
+      const { file, errors } = rejection
+      const errorMsg = errors.map(e => {
+        if (e.code === 'file-too-large') return 'File exceeds 50MB limit'
+        if (e.code === 'file-invalid-type') return 'Invalid file format'
+        return e.message
+      }).join(', ')
+      toast.error(`Rejected ${file.name}: ${errorMsg}`)
+    })
+  }, [])
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    onDropRejected,
     accept,
     multiple,
-    disabled: isUploading
+    disabled: isUploading,
+    maxSize: MAX_FILE_SIZE
   })
 
   return (
